@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-    http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+<!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+<!--        <property name="locations" value="classpath:application.properties"/>-->
+<!--    </bean>-->
 
     <bean id="driver" class="java.lang.String" >
-        <constructor-arg type="java.lang.String" value="postgres"/>
+        <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
 
-    <bean id="pool1" class="ru.venidiktov.database.ConnectionPool">
-        <constructor-arg name="username" ref="driver"/>
-        <constructor-arg name="poolSize" value="10"/>
+    <bean id="pool1" class="ru.venidiktov.database.ConnectionPool"
+    init-method="init"
+    destroy-method="destroy">
+        <constructor-arg name="username" value="${db.username}"/>
+        <constructor-arg name="poolSize" value="${db.pool.size}"/>
         <constructor-arg name="args">
             <list>
             <value>--arg1=value1</value>
@@ -24,9 +35,12 @@
         </constructor-arg>
         <property name="properties">
             <map>
-                <entry key="url" value="localhost"/>
-                <entry key="password" value="123"/>
-                <entry key="driver" value-ref="driver"/>
+                <entry key="url" value="${db.url}"/>
+                <entry key="password" value="#{driver.substring(3)}"/>
+                <entry key="driver" value="#{driver.length() > 10}"/>
+                <entry key="random" value="#{driver.length() > T(Math).random() * 10}"/>
+                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
+                <entry key="currentUser" value="#{systemProperties['user.name']}"/>
             </map>
         </property>
     </bean>
