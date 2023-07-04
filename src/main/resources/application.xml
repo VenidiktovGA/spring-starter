@@ -20,12 +20,15 @@
             </list>
         </constructor-arg>
         <constructor-arg name="properties">
+            <null/>
+        </constructor-arg>
+        <property name="properties">
             <map>
                 <entry key="url" value="localhost"/>
                 <entry key="password" value="123"/>
                 <entry key="driver" value-ref="driver"/>
             </map>
-        </constructor-arg>
+        </property>
     </bean>
 
     <bean id="userRepository" class="ru.venidiktov.repo.UserRepository" factory-method="of">
