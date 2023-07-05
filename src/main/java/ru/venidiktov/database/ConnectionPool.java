@@ -1,5 +1,7 @@
 package ru.venidiktov.database;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
@@ -23,19 +25,21 @@ public class ConnectionPool implements InitializingBean {
         this.properties = properties;
     }
 
+    @PostConstruct
     private void init() {
         System.out.print("Initialization callback. ");
-        System.out.println("Call init-method from xml");
+        System.out.println("Call init-method from annotation");
     }
 
+    @PreDestroy
     private void destroy(){
         System.out.print("Destroy callback. ");
-        System.out.println("Call destroy-method from xml");
+        System.out.println("Call destroy-method from annotation");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.print("Initialization callback. ");
-        System.out.println("Call init-method from interface InitializingBean");
+        System.out.println("Call init-method from xml InitializingBean");
     }
 }

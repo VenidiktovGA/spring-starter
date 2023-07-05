@@ -15,6 +15,7 @@
   </properties>
 
   <dependencies>
+    <!-- spring -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
@@ -26,13 +27,24 @@
       <artifactId>spring-context</artifactId>
       <version>6.0.10</version>
     </dependency>
+    <!-- /spring -->
 
+    <!-- @PostConstruct @PreDestroy -->
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>2.1.1</version>
+    </dependency>
+    <!-- /@PostConstruct @PreDestroy -->
+
+    <!-- test -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- test -->
   </dependencies>
 
   <build>
