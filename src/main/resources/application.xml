@@ -16,6 +16,7 @@
 
     <bean class="ru.venidiktov.bpp.InjectBeanPostProcessor"/>
     <bean class="ru.venidiktov.bpp.TransactionBeanPostProcessor"/>
+    <bean class="ru.venidiktov.bpp.AuditBeanPostProcessor"/>
 
     <bean id="driver" class="java.lang.String" >
         <constructor-arg type="java.lang.String" value="${db.driver}"/>

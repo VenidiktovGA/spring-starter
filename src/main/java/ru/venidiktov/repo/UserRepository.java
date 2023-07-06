@@ -2,11 +2,13 @@ package ru.venidiktov.repo;
 
 import jakarta.annotation.PostConstruct;
 import java.util.Optional;
+import ru.venidiktov.bpp.Audit;
 import ru.venidiktov.bpp.InjectBean;
 import ru.venidiktov.bpp.Transaction;
 import ru.venidiktov.database.ConnectionPool;
 import ru.venidiktov.entity.User;
 
+@Audit
 @Transaction
 public class UserRepository implements CrudRepository<Integer, User> {
     @InjectBean
