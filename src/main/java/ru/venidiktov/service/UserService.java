@@ -1,11 +1,14 @@
 package ru.venidiktov.service;
 
-import ru.venidiktov.repo.UserRepository;
+import org.springframework.stereotype.Service;
+import ru.venidiktov.entity.User;
+import ru.venidiktov.repo.CrudRepository;
 
+@Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final CrudRepository<Integer, User> userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(CrudRepository userRepository) {
         this.userRepository = userRepository;
     }
 }

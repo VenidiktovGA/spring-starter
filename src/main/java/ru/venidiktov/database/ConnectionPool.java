@@ -2,27 +2,19 @@ package ru.venidiktov.database;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import java.util.List;
-import java.util.Map;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-public class ConnectionPool implements InitializingBean {
+@Component
+public class ConnectionPool {
     private final String username;
     private final Integer poolSize;
-    private final List<Object> args;
-    private Map<String, Object> properties;
 
-    public ConnectionPool(String username, Integer poolSize, List<Object> args, Map<String, Object> properties) {
+    public ConnectionPool(@Value("${db.username}") String username,
+                          @Value("${db.pool.size}") Integer poolSize) {
         System.out.println("Call constructor class");
         this.username = username;
         this.poolSize = poolSize;
-        this.args = args;
-        this.properties = properties;
-    }
-
-    public void setProperties(Map<String, Object> properties) {
-        System.out.println("Call set DI");
-        this.properties = properties;
     }
 
     @PostConstruct
@@ -35,11 +27,5 @@ public class ConnectionPool implements InitializingBean {
     private void destroy(){
         System.out.print("Destroy callback. ");
         System.out.println("Call destroy-method from annotation");
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.print("Initialization callback. ");
-        System.out.println("Call init-method from xml InitializingBean");
     }
 }

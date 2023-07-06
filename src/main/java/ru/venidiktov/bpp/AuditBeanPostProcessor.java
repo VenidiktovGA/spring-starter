@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuditBeanPostProcessor implements BeanPostProcessor {
 
     private Map<String, Class<?>> auditBeans = new HashMap<>();
