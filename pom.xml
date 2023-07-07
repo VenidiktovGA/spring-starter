@@ -37,6 +37,14 @@
     </dependency>
     <!-- /@PostConstruct @PreDestroy -->
 
+    <!-- @Autowired @Component @Scope -->
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+    </dependency>
+    <!-- /@Autowired @Component @Scope -->
+
     <!-- test -->
     <dependency>
       <groupId>junit</groupId>
