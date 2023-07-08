@@ -1,0 +1,12 @@
+package ru.venidiktov.listener.entity;
+
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class EntityListener {
+    @EventListener(condition = "#root.args[0].accessType.name() == 'READ'")
+    public void acceptEntityRead(EntityEvent event) {
+        System.out.println("Отработал EntityEventListener, entity: " + event);
+    }
+}
