@@ -14,7 +14,6 @@ import ru.venidiktov.entity.User;
 @Transaction
 @Repository
 public class UserRepository implements CrudRepository<Integer, User> {
-    @Autowired
     private final ConnectionPool connectionPool;
 
     public UserRepository(ConnectionPool connectionPool) {
