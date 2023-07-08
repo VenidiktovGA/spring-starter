@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import ru.venidiktov.database.ConnectionPool;
@@ -27,12 +28,12 @@ import web.WebConfiguration;
         }
 )
 public class ApplicationConfiguration {
-
         @Bean
         public ConnectionPool pool2(@Value("${db.username}") String username) {
                 return new ConnectionPool(username, 20);
         }
 
+        @Profile("prod") //Можно использовать операции ! & | (!prod prod&web prod|web)
         @Bean
         public UserRepository userRepository2(ConnectionPool pool2) {
                 return new UserRepository(pool2);
