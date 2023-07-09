@@ -1,16 +1,13 @@
 package ru.venidiktov;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.venidiktov.config.ApplicationConfiguration;
-import ru.venidiktov.service.UserService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class ApplicationRunner
 {
     public static void main( String[] args )
     {
-        try(var context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class)) {
-            var userService = context.getBean("userService", UserService.class);
-            userService.findById(1);
-        }
+        SpringApplication.run(ApplicationRunner.class, args);
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import ru.venidiktov.database.ConnectionPool;
 import ru.venidiktov.repo.CrudRepository;
@@ -17,7 +16,6 @@ import web.WebConfiguration;
 
 @Import({WebConfiguration.class})
 @Configuration
-@PropertySource("classpath:application.properties")
 @ComponentScan(
       basePackages = "ru.venidiktov",
         useDefaultFilters = false,
