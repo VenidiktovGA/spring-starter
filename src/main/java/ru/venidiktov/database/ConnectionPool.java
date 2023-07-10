@@ -2,20 +2,17 @@ package ru.venidiktov.database;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class ConnectionPool {
+    @Value("${db.username}")
     private final String username;
+    @Value("${db.pool.size}")
     private final Integer poolSize;
-
-    public ConnectionPool(@Value("${db.username}") String username,
-                          @Value("${db.pool.size}") Integer poolSize) {
-        System.out.println("Call constructor class");
-        this.username = username;
-        this.poolSize = poolSize;
-    }
 
     @PostConstruct
     private void init() {

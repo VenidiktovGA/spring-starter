@@ -2,6 +2,7 @@ package ru.venidiktov.repo;
 
 import jakarta.annotation.PostConstruct;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.venidiktov.bpp.Audit;
@@ -13,12 +14,9 @@ import ru.venidiktov.entity.User;
 @Audit
 @Transaction
 @Repository
+@RequiredArgsConstructor
 public class UserRepository implements CrudRepository<Integer, User> {
     private final ConnectionPool connectionPool;
-
-    public UserRepository(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
-    }
 
     @PostConstruct
     private void init() {
