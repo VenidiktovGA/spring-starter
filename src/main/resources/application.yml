@@ -4,10 +4,20 @@ spring:
 db:
   username: ${username.value:postgres}
   password: 1234
-  pool:
-    size: 10
   driver: PostgreDriver
   url: postgre:5432
   hosts:
   - localhost
   - 127.0.0.1
+  pool:
+    size: 10
+    timeout: 10
+  pools:
+    - size: 20
+      timeout: 20
+    - size: 33
+      timeout: 33
+  properties:
+    first: 123
+    second: 11-07-2023
+    third.value: Third
