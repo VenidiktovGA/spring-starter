@@ -3,10 +3,12 @@ package ru.venidiktov.bpp;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class AuditBeanPostProcessor implements BeanPostProcessor {
 
@@ -28,12 +30,12 @@ public class AuditBeanPostProcessor implements BeanPostProcessor {
                     beanClass.getClassLoader(),
                     beanClass.getInterfaces(),
                     (proxy, method, args) -> {
-                        System.out.println("Audit method: " + method.getName());
+                        log.info("Audit method: " + method.getName());
                         var startTime = System.nanoTime();
                         try {
                             return method.invoke(bean, args);
                         } finally {
-                            System.out.println("Time execution: " + (System.nanoTime() - startTime));
+                            log.info("Time execution: " + (System.nanoTime() - startTime));
                         }
                     });
         }

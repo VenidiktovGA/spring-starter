@@ -4,10 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class TransactionBeanPostProcessor implements BeanPostProcessor {
 
@@ -29,11 +31,11 @@ public class TransactionBeanPostProcessor implements BeanPostProcessor {
                     beanClass.getClassLoader(),
                     beanClass.getInterfaces(),
                     (proxy, method, args) -> {
-                        System.out.println("Open transaction");
+                        log.info("Open transaction");
                         try {
                             return method.invoke(bean, args);
                         } finally {
-                            System.out.println("Close transation");
+                            log.info("Close transation");
                         }
                     });
         }

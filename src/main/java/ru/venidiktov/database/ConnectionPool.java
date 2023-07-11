@@ -3,9 +3,11 @@ package ru.venidiktov.database;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ConnectionPool {
@@ -16,13 +18,13 @@ public class ConnectionPool {
 
     @PostConstruct
     private void init() {
-        System.out.print("Initialization callback. ");
-        System.out.println("Call init-method from annotation");
+        log.info("Initialization callback. ");
+        log.info("Call init-method from annotation");
     }
 
     @PreDestroy
     private void destroy(){
-        System.out.print("Destroy callback. ");
-        System.out.println("Call destroy-method from annotation");
+        log.info("Destroy callback. ");
+        log.info("Call destroy-method from annotation");
     }
 }
