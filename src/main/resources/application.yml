@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: prod
+  output:
+    ansi:
+      enabled: always
 
 db:
   username: ${username.value:postgres}
