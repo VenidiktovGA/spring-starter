@@ -23,7 +23,7 @@ db:
     second: 11-07-2023
     third.value: Third
 
-#logging:
-#  level:
-#    root: WARN
-#    ru.venidiktov.database.ConnectionPool: INFO
+logging:
+  file:
+    name: venidiktov.log
+    path: /
