@@ -1,35 +1,39 @@
 package ru.venidiktov.service;
 
 import java.util.Optional;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.test.context.ActiveProfiles;
 import ru.venidiktov.entity.User;
 import ru.venidiktov.listener.entity.EntityEvent;
-import ru.venidiktov.repo.CrudRepository;
+import ru.venidiktov.repo.UserRepository;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@ActiveProfiles("test")
 class UserServiceTest {
 
-    @Mock
+    @MockBean
     private ApplicationEventPublisher eventPublisher;
 
-    @Mock
-    private CrudRepository<Integer, User> userRepository;
+    @MockBean
+    private UserRepository userRepository;
 
-    @InjectMocks
     private UserService userService;
+
+    @BeforeEach
+    void init() {
+        userService = new UserService(eventPublisher, userRepository);
+    }
 
     @Test
     void findById_successFind_ifUserByIdContains() {

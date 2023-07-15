@@ -1,5 +1,6 @@
 package ru.venidiktov.service;
 
+import jakarta.annotation.PostConstruct;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -19,5 +20,10 @@ public class UserService {
         var user = userRepository.findById(id);
         eventPublisher.publishEvent(new EntityEvent(user, AccessType.READ));
         return user;
+    }
+
+    @PostConstruct
+    void init() {
+        System.out.println("ТУУУУУУУУУУУУУУУУт!!");
     }
 }
