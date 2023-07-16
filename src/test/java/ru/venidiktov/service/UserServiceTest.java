@@ -7,26 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.test.context.ActiveProfiles;
+import static org.mockito.Mockito.when;
+import ru.venidiktov.BaseTest;
 import ru.venidiktov.entity.User;
 import ru.venidiktov.listener.entity.EntityEvent;
-import ru.venidiktov.repo.UserRepository;
 
-@SpringBootTest
-@ActiveProfiles("test")
-class UserServiceTest {
-
-    @MockBean
-    private ApplicationEventPublisher eventPublisher;
-
-    @MockBean
-    private UserRepository userRepository;
+class UserServiceTest extends BaseTest {
 
     private UserService userService;
 
@@ -38,7 +26,7 @@ class UserServiceTest {
     @Test
     void findById_successFind_ifUserByIdContains() {
         var userId = 3;
-        doReturn(Optional.of(new User(userId))).when(userRepository).findById(userId);
+        when(userRepository.findById(userId)).thenReturn(Optional.of(new User(userId)));
 
         var userOptional = userService.findById(userId);
 
