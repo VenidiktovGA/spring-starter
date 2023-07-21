@@ -25,8 +25,8 @@ class UserServiceTest extends BaseTest {
 
     @Test
     void findById_successFind_ifUserByIdContains() {
-        var userId = 3;
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new User(userId)));
+        var userId = 3L;
+        when(userRepository.findById(userId)).thenReturn(Optional.of(User.builder().id(userId).build()));
 
         var userOptional = userService.findById(userId);
 
@@ -34,7 +34,7 @@ class UserServiceTest extends BaseTest {
         verifyNoMoreInteractions(eventPublisher);
         assertAll(
                 () -> assertTrue(userOptional.isPresent()),
-                () -> assertThat(userOptional.get().id()).isEqualTo(userId)
+                () -> assertThat(userOptional.get().getId()).isEqualTo(userId)
         );
     }
 }

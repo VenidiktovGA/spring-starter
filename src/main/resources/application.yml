@@ -13,6 +13,9 @@ spring:
     properties.hibernate:
       show_sql: true
       format_sql: true
+      hbm2ddl.auto: validate #Используем hibernate генератор базы данных по аннотациям для валидации
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
 
 db:
   username: ${username.value:postgres}
@@ -35,7 +38,7 @@ db:
     second: 11-07-2023
     third.value: Third
 
-logging:
-  file:
-    name: venidiktov.log
-    path: /
+#logging:
+#  file:
+#    name: venidiktov.log
+#    path: /

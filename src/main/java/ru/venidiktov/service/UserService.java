@@ -13,9 +13,9 @@ import ru.venidiktov.repo.CrudRepository;
 @RequiredArgsConstructor
 public class UserService {
     private final ApplicationEventPublisher eventPublisher;
-    private final CrudRepository<Integer, User> userRepository;
+    private final CrudRepository<Long, User> userRepository;
 
-    public Optional<User> findById(Integer id) {
+    public Optional<User> findById(Long id) {
         var user = userRepository.findById(id);
         eventPublisher.publishEvent(new EntityEvent(user, AccessType.READ));
         return user;

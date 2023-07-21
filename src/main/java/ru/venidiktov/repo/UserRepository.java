@@ -17,7 +17,7 @@ import ru.venidiktov.entity.User;
 @Transaction
 @Repository
 @RequiredArgsConstructor
-public class UserRepository implements CrudRepository<Integer, User> {
+public class UserRepository implements CrudRepository<Long, User> {
     private final ConnectionPool connectionPool;
 
     @PostConstruct
@@ -26,9 +26,9 @@ public class UserRepository implements CrudRepository<Integer, User> {
     }
 
     @Override
-    public Optional<User> findById(Integer id) {
+    public Optional<User> findById(Long id) {
         log.info("Call method findById() from UserRepository class");
-        return Optional.of(new User(id));
+        return Optional.of(User.builder().id(id).build());
     }
 
     @Override
