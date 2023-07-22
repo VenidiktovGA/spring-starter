@@ -1,25 +1,29 @@
 package ru.venidiktov;
 
-import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import ru.venidiktov.repo.CompanyRepository;
 import ru.venidiktov.repo.CrudRepository;
+import ru.venidiktov.service.UserService;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@Import(TestConfig.class)
 public class BaseJpaTest {
-    @MockBean
-    public ApplicationEventPublisher eventPublisher;
+
+    @Autowired
+    protected ApplicationEventPublisher applicationEventPublisher;
 
     @SpyBean
-    public CrudRepository userRepository;
+    protected CrudRepository userRepository;
 
     @SpyBean
-    public CompanyRepository companyRepository;
+    protected CompanyRepository companyRepository;
+
+    @SpyBean
+    protected UserService userService;
 }

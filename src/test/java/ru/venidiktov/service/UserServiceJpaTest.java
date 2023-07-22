@@ -4,7 +4,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -15,14 +14,6 @@ import ru.venidiktov.entity.User;
 import ru.venidiktov.listener.entity.EntityEvent;
 
 class UserServiceJpaTest extends BaseJpaTest {
-
-    private UserService userService;
-
-    @BeforeEach
-    void init() {
-        userService = new UserService(eventPublisher, userRepository);
-    }
-
     @Test
     void findById_successFind_ifUserByIdContains() {
         var userId = 3L;
@@ -30,8 +21,8 @@ class UserServiceJpaTest extends BaseJpaTest {
 
         var userOptional = userService.findById(userId);
 
-        verify(eventPublisher).publishEvent(any(EntityEvent.class));
-        verifyNoMoreInteractions(eventPublisher);
+        verify(applicationEventPublisher).publishEvent(any(EntityEvent.class));
+        verifyNoMoreInteractions(applicationEventPublisher);
         assertAll(
                 () -> assertTrue(userOptional.isPresent()),
                 () -> assertThat(userOptional.get().getId()).isEqualTo(userId)
