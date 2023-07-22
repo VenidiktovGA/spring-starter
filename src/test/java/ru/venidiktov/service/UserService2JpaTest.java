@@ -2,9 +2,9 @@ package ru.venidiktov.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.venidiktov.BaseTest;
+import ru.venidiktov.BaseJpaTest;
 
-class UserService2Test extends BaseTest {
+class UserService2JpaTest extends BaseJpaTest {
 
     @Autowired
     private UserService userService;

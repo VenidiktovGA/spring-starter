@@ -10,11 +10,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import ru.venidiktov.BaseTest;
+import ru.venidiktov.BaseJpaTest;
 import ru.venidiktov.entity.User;
 import ru.venidiktov.listener.entity.EntityEvent;
 
-class UserServiceTest extends BaseTest {
+class UserServiceJpaTest extends BaseJpaTest {
 
     private UserService userService;
 

@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset init:1
+--changeset Venidiktov G.A:1
 CREATE TABLE IF NOT EXISTS company
 (
 id SERIAL PRIMARY KEY,
@@ -17,7 +17,7 @@ PRIMARY KEY (company_id, lang)
 CREATE TABLE IF NOT EXISTS users
 (
 id BIGSERIAL PRIMARY KEY,
-username VARCHAR(64) NOT NULL UNIQUE,
+user_name VARCHAR(64) NOT NULL UNIQUE,
 birth_date DATE,
 first_name VARCHAR(64),
 last_name VARCHAR(64),
