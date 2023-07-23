@@ -8,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.entity.User;
 import ru.venidiktov.listener.entity.AccessType;
 import ru.venidiktov.listener.entity.EntityEvent;
-import ru.venidiktov.repo.CrudRepository;
+import ru.venidiktov.repo.UserRepository;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final ApplicationEventPublisher eventPublisher;
-    private final CrudRepository<Long, User> userRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Optional<User> findById(Long id) {

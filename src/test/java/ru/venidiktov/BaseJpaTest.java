@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import ru.venidiktov.repo.CompanyRepository;
-import ru.venidiktov.repo.CrudRepository;
+import ru.venidiktov.repo.UserRepository;
 import ru.venidiktov.service.UserService;
 
 @SpringBootTest
@@ -19,7 +19,7 @@ public class BaseJpaTest {
     protected ApplicationEventPublisher applicationEventPublisher;
 
     @SpyBean
-    protected CrudRepository userRepository;
+    protected UserRepository userRepository;
 
     @SpyBean
     protected CompanyRepository companyRepository;
