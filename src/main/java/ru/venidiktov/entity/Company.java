@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "company")
+@NamedQuery(
+        name = "Company.findByName",
+        query = "select c from Company c where lower(c.name) = lower(:name)"
+)
 public class Company implements BaseEntity<Integer> {
 
     @Id
