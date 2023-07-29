@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import ru.venidiktov.entity.Company;
 
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
-    @Query("select c form Company c" +
+    @Query("select c from Company c " +
             "join fetch c.locales cl " +
             " where c.name = :name")
     Optional<Company> findByName(@Param("name") String name);
