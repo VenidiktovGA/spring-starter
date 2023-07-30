@@ -4,9 +4,13 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.BaseJpaTest;
+import ru.venidiktov.entity.Company;
 import ru.venidiktov.entity.Role;
+import ru.venidiktov.entity.User;
 
 class UserRepositoryTest extends BaseJpaTest {
 
@@ -24,4 +28,24 @@ class UserRepositoryTest extends BaseJpaTest {
         assertSame(Role.USER, theSameIvan.getRole());
     }
 
+    @Test
+    void checkFirstTop() {
+        var topUser = userRepository.findTopByOrderByIdDesc();
+
+        assertThat(topUser).isPresent();
+
+        var sort = Sort.sort(User.class);
+        sort.by(User::getFirstName).and(sort.by(User::getLastName));
+        var allUsers = userRepository.findTop3ByBirthDateBefore(LocalDate.now(), sort);
+        assertThat(allUsers).hasSize(3);
+    }
+
+    @Test
+    void checkPageable() {
+        var sort = Sort.sort(User.class).by(User::getId);
+        var pageable = PageRequest.of(1, 2, sort);
+
+        var allUsers = userRepository.findAllBy(pageable);
+        assertThat(allUsers).hasSize(2);
+    }
 }

@@ -18,11 +18,15 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"userChats", "company"})
+@EqualsAndHashCode(of = "username")
 @Builder
 @Entity
 @Table(name = "users")
