@@ -45,7 +45,12 @@ class UserRepositoryTest extends BaseJpaTest {
         var sort = Sort.sort(User.class).by(User::getId);
         var pageable = PageRequest.of(1, 2, sort);
 
-        var allUsers = userRepository.findAllBy(pageable);
-        assertThat(allUsers).hasSize(2);
+        var slice = userRepository.findAllBy(pageable);
+        assertThat(slice).hasSize(2);
+
+        if(slice.hasNext()) {
+            var slice2 = userRepository.findAllBy(slice.nextPageable());
+            assertThat(slice2).hasSize(1);
+        }
     }
 }
