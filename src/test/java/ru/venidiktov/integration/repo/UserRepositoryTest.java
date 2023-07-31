@@ -53,4 +53,13 @@ class UserRepositoryTest extends BaseJpaTest {
             assertThat(slice2).hasSize(1);
         }
     }
+
+    @Test
+    void checkEntityGraph() {
+        var sort = Sort.sort(User.class).by(User::getId);
+        var pageable = PageRequest.of(1, 2, sort);
+
+        var slice = userRepository.findAllBy(pageable);
+        assertThat(slice.getContent().get(0).getCompany().getName()).isNotNull();
+    }
 }
