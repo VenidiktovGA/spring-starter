@@ -33,10 +33,16 @@ class UserRepositoryTest extends BaseJpaTest {
         var topUser = userRepository.findTopByOrderByIdDesc();
 
         assertThat(topUser).isPresent();
+    }
 
+    @Test
+    @Transactional
+    void findTop3ByBirthDateBefore() {
         var sort = Sort.sort(User.class);
         sort.by(User::getFirstName).and(sort.by(User::getLastName));
+
         var allUsers = userRepository.findTop3ByBirthDateBefore(LocalDate.now(), sort);
+
         assertThat(allUsers).hasSize(3);
     }
 
