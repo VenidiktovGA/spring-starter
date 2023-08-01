@@ -1,6 +1,7 @@
 package ru.venidiktov.integration.repo;
 
 import java.time.LocalDate;
+import lombok.val;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.BaseJpaTest;
+import ru.venidiktov.dto.UserInfo;
 import ru.venidiktov.entity.Company;
 import ru.venidiktov.entity.Role;
 import ru.venidiktov.entity.User;
@@ -67,5 +69,19 @@ class UserRepositoryTest extends BaseJpaTest {
 
         var slice = userRepository.findAllBy(pageable);
         assertThat(slice.getContent().get(0).getCompany().getName()).isNotNull();
+    }
+
+    @Test
+    void checkProjection() {
+        val users = userRepository.findAllByCompanyId(7, UserInfo.class);
+
+        assertThat(users).isNotEmpty();
+    }
+
+    @Test
+    void checkProjectionWithNativeQuery() {
+        val users = userRepository.findAllFIOByCompanyId(7);
+
+        assertThat(users).isNotEmpty();
     }
 }
